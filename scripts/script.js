@@ -64,7 +64,7 @@ function createChart(top_results, type){
   myChart = new Chart(ctx, {
     type: type,
     data: {
-      labels: top_results.map(a => a.name + ` ( ${a.stars}🌟)`),
+      labels: top_results.map(a => a.name + ` (${a.stars}🌟)`),
       datasets: [{
         label: '# of Reviews',
         data: top_results.map(a => a.review_count),
