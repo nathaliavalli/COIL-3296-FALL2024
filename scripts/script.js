@@ -2,7 +2,11 @@ const ctx = document.getElementById('myChart');
 
 const sourceFile = "../data/yelp_academic_dataset_business.json"
 
-var filteredResults = []
+var filteredResults = [];
+
+let top_results;
+
+let myChart;
 
 //open and get file contents
 fetch(sourceFile)
@@ -44,15 +48,20 @@ fetch(sourceFile)
   });
 
   //get top 10 of the sorted results
-  var top_results = filteredResults.slice(0, 10)
+  top_results = filteredResults.slice(0, 10)
 
   createChart(top_results, 'bar');
 });
 
+function setChartType(chartType){
+  myChart.destroy();
+  createChart(top_results, chartType)
+}
+
 
 function createChart(top_results, type){
 
-  new Chart(ctx, {
+  myChart = new Chart(ctx, {
     type: type,
     data: {
       labels: top_results.map(a => a.name + ` (${a.stars})`),
